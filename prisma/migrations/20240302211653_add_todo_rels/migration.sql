@@ -1,0 +1,10 @@
+-- CreateTable
+CREATE TABLE "Todos" (
+    "Id" TEXT NOT NULL PRIMARY KEY,
+    "Name" TEXT NOT NULL,
+    "Done" BOOLEAN NOT NULL DEFAULT false,
+    "ownerId" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "Todos_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User" ("Id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
