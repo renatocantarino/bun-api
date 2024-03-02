@@ -1,0 +1,15 @@
+GET http://localhost:3000/users
+
+
+###
+GET http://localhost:3000/users/5b47cb38-74c3-403f-9ae0-7ab415193cdc
+Content-Type: application/json
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name":"xxxxx",
+    "email":"xxxxx"
+}

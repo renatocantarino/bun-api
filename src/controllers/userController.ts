@@ -24,5 +24,40 @@ export const FindUserByIdController = async (
     },
   });
 
+  if (!user) {
+    return response.sendStatus(404);
+  }
+
   response.json(user);
+};
+
+export const CreateUserController = async (
+  request: Request,
+  response: Response
+) => {
+  const { name, email } = request.body;
+
+  const userAlreadyExists = await prisma.user.findUnique({
+    where: {
+      Email: email,
+    },
+    select: {
+      Id: true,
+    },
+  });
+
+  if (userAlreadyExists) {
+    return response.sendStatus(400).send({
+      error: 'User already exists',
+    });
+  }
+
+  const userCreated = await prisma.user.create({
+    data: {
+      Name: name,
+      Email: email,
+    },
+  });
+
+  return response.json(userCreated);
 };
